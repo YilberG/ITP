@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-4 bg-dark text-center text-white">
+        <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="100" height="100">
+    </div>
+    <div class="col-4 bg-dark text-center text-white">
+        <br><h1><b><b>BIENVENIDO ESTUDIANTE</b> </b> </h1>
+    </div>
+    <div class="col-4 bg-dark text-center text-white"><br>
+        <a href="{{ url_for('cerrarSession') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+        </a>
+    </div>
+</div> <hr>
+    <b>Nombre Del Alumno: {{ session['nombres'] }}</b><br>
+    <b>Correo Electronico: {{ session['email'] }}</b><br>
+<div class="card card-body">
+    <b class="text-center">Registro De Materias</b>
+    <select name="materias" id="" class="form-input " required>
+        <option value="0">          </option>
+        {% for mat in materias %}
+        <option value="{{mat.id_materias}}" >{{ mat.materia }}</option>
+        {% endfor %}
+    </select>
+    <div class="form-group pt-2">
+        <button type="submit" class="btn btn-primary btn-block">Registrar Materia</button>
+    </div>
+</div>
+{% endblock %}

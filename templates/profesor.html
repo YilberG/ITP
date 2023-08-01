@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-4 bg-dark text-center text-white">
+            <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="100" height="100">
+        </div>
+        <div class="col-4 bg-dark text-center text-white">
+            <br><h1><b><b>Docente: {{ session['nombres'] }} </b> </b> </h1>
+        </div>
+        <div class="col-4 bg-dark text-center text-white"><br>
+            <a href="{{ url_for('cerrarSession') }}">
+                <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+            </a>
+        </div>
+
+        <div class="col-md-5">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <hr>
+            <div class="card card-body">
+                <p>Agregar Estudiante</p>
+                <form action="{{ url_for('registroProfesorPost') }}" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="nombre" placeholder="Nombre Completo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="contraseña" placeholder="Contraseña" class="form-control">
+                    </div> <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <hr>
+            <table class="table table-striped table-bordered table-sm ">
+                <thead class="text-center">
+                    <tr>
+                        <td> <b>Nombre Completo</b> </td>
+                        <td> <b>Correo</b> </td>
+                        <td> <b>Operaciones</b> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for estudiantes in datos %}
+                        <tr>
+                            <td>{{ estudiantes.nombres  }}</td>
+                            <td>{{ estudiantes.email  }}</td>
+                            <td>
+                                <a href="/edit/{{estudiantes.id}}" class="btn btn-secondary">Editar</a>
+                                <a href="/delete/{{estudiantes.id}}" class="btn btn-danger btn-delete">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-4 bg-dark text-center text-white">
+        <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="100" height="100">
+    </div>
+    <div class="col-4 bg-dark text-center text-white">
+        <br><h1><b><b>Pagina Editar {{ session.nombres }} </b> </b> </h1>
+    </div>
+    <div class="col-4 bg-dark text-center text-white"><br>
+        <a href="{{ url_for('cerrarSession') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+        </a>
+    </div>
+</div>
+<hr>
+<div class="col-md-4 offset-md-4">
+    <div class="card card-body">
+        <form action="/updateAdmin/{{datos2.id}}" method="POST">
+            <b>Nombres Completos</b>
+            <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre Completo" value="{{datos2.nombres}}" class="form-control" required>
+            </div>
+            <b>Correo Electronico</b>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Correo Electronico" value="{{datos2.email}}" class="form-control" required>
+            </div>
+            <b>Contraseña</b>
+            <div class="form-group pt-2">
+                <input type="text" name="contraseña" placeholder="Contraseña" value="{{datos2.contraseña}}" class="form-control" required>
+            </div>
+            <b>Rol</b>
+            <select name="roles" id="" class="form-input " required>
+                <option value="0">          </option>
+                {% for rol in roles2 %}
+                <option value="{{rol.id_rol}}" >{{ rol.tipo_rol }}</option>
+                {% endfor %}
+            </select>
+            <div class="form-group pt-2">
+                <button type="submit" class="btn btn-success btn-block">Guardar</button>
+            </div>
+
+
+
+
+            
+        </form>
+    </div>
+</div>
+{% endblock %}

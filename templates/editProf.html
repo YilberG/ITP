@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-4 bg-dark text-center text-white">
+        <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="100" height="100">
+    </div>
+    <div class="col-4 bg-dark text-center text-white">
+        <br><h1><b><b>Pagina Editar {{ session.nombres }} </b> </b> </h1>
+    </div>
+    <div class="col-4 bg-dark text-center text-white"><br>
+        <a href="{{ url_for('cerrarSession') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+        </a>
+    </div>
+</div>
+<hr>
+<div class="col-md-4 offset-md-4">
+    <div class="card card-body">
+        <form action="/update/{{datos.id}}" method="POST">
+            <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre Completo" value="{{datos.nombres}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Correo Electronico" value="{{datos.email}}" class="form-control" required>
+            </div><br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block">Guardar</button>
+            </div>
+
+
+
+
+            
+        </form>
+    </div>
+</div>
+{% endblock %}
