@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session #pip install Flask
 from flask_mysqldb import MySQL # pip install Flask-MySQLdb
 from os import path
-#from notifypy import Notify
+from notifypy import Notify
 import mysql.connector,string
 
 app = Flask(__name__)
